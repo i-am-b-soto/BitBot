@@ -1,0 +1,34 @@
+from Bank import Bank
+from datetime import datetime
+
+class Decision(object):
+	""""""
+	def __init__(self, bank):
+		self.has_bought = False
+		self.bank = bank
+
+	def make_decision(self, EMA, SMA, price_crypto):
+		
+		print "--- Decision  ---"
+		print "EMA: " + str(EMA) + " SMA: " + str(SMA) + " Current Price: " + str(price_crypto)
+
+		# we are looking for an opportunity to sell
+		if self.has_bought:
+			if EMA <= SMA:
+				print " Making purchase at: " + str(price_crypto)
+				self.bank.sell(price_crypto)
+				self.has_bought = False
+			else:
+				print "Holding"
+
+		# we are looking for an opportunity to buy
+		else:
+			if EMA >= SMA:
+				print "Purchasing at: " + str(price_crypto)
+				self.bank.buy(price_crypto)
+				self.has_bought = True
+			else:
+				print "Holding"
+
+		return 
+		
