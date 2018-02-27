@@ -32,7 +32,7 @@ class Decision(object):
 			else:
 				print "Holding"
 
-		if bank.dead:
+		if self.bank.dead:
 			sys.exit("Bank is out of resources, halting program")
 
 		return 
