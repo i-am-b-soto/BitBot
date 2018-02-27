@@ -38,11 +38,14 @@ class SMA(object):
   		used_times = {}
 		iteration = 0
 		for OHLCV in data:
-			if  len(self.closing_prices) < self.duration:
-				self.closing_prices.append(OHLCV[4])
-			else:
-				self.closing_prices.pop(0)
-				self.closing_prices.append(OHLCV[4])
+			try:
+				if  len(self.closing_prices) < self.duration:
+					self.closing_prices.append(float(OHLCV[4]))
+				else:
+					self.closing_prices.pop(0)
+					self.closing_prices.append(float(OHLCV[4]))
+			except Exception as e:
+				continue
 
 
 	# Add up sum dem minutes, add it to the total SMA
@@ -58,14 +61,14 @@ class SMA(object):
 	# Geeet summm
 	def get_SMA(self):
 		closing_price_sum = 0
-		for i in range(self.duration):
+		for i in range(len(self.closing_prices)):
 			closing_price_sum = closing_price_sum + self.closing_prices[i]
 		self.SMA = closing_price_sum/self.duration
 		return self.SMA
 
 	# get da current price
 	def get_current_price(self):
-		return self.closing_prices[self.duration -1]
+		return self.closing_prices[len(self.closing_prices)-1]
 
 	# Get all dem current prices
 	def get_closing_prices(self):

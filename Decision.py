@@ -13,6 +13,8 @@ class Decision(object):
 		if self.has_bought:
 			if EMA <= SMA:
 				print " Making purchase at: " + str(price_crypto)
+				print " Time: "
+				print datetime.now()
 				self.bank.sell(price_crypto)
 				self.has_bought = False
 			else:
@@ -22,6 +24,8 @@ class Decision(object):
 		else:
 			if EMA >= SMA:
 				print "Purchasing at: " + str(price_crypto)
+				print "Time: " 
+				print datetime.now()
 				self.bank.buy(price_crypto)
 				self.has_bought = True
 			else:

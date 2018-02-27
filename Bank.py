@@ -15,9 +15,6 @@ class Bank(object):
 		self.Crypto = self.Crypto + ((self.USD / 2)/price_crypto)
 		self.USD = self.USD - (self.USD/2) - ((self.USD/2) * 0.003) 
 		print(self.current_info())
-		rFile = open(self.file, "a")
-		rFile.write(self.current_info())
-		rFile.close()
 
 	def sell(self, price_crypto):
 		if self.Crypto <= 0:
@@ -26,9 +23,7 @@ class Bank(object):
 		self.USD = (self.Crypto - self.Crypto * 0.003) * price_crypto
 		self.Crypto = 0
 		print(self.current_info())
-		rFile = open(self.file, "a")
-		rFile.write(self.current_info())
-		rFile.close()
+
 
 
 		
