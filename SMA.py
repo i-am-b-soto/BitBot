@@ -50,8 +50,9 @@ class SMA(object):
 		if num_minutes == 0:
 			return;
 		
-		data = self.GDAX.make_request(datetime.now().replace(microsecond = 0, second = 0) - timedelta(seconds = num_minutes * 60),
-		 datetime.now().replace(microsecond = 0, second = 0))
+		data = self.GDAX.make_request(datetime.utcnow().replace(microsecond = 0, second = 0) - timedelta(seconds = num_minutes * 60), 
+			datetime.utcnow().replace(microsecond = 0, second = 0))
+		
 		self.generate_list(data)
 
 	# Geeet summm

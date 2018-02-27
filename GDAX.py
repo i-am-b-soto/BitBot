@@ -14,7 +14,7 @@ class GDAX(object):
   def __init__(self, coin):
 
     self.coin = coin
-    self.uri = 'https://api.gdax.com/products/'+coin+ '/candles'
+    self.uri = 'https://api.gdax.com/products/'+ coin+ '/candles'
 
   @staticmethod
   def __date_to_iso8601(date):
@@ -46,6 +46,6 @@ class GDAX(object):
       except Exception as e:
         pass
       
-    return "{}"
+    return []
 
 

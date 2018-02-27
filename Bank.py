@@ -1,14 +1,12 @@
 class Bank(object):
 	"""docstring foBankme"""
-	def __init__(self, USD, Crypto):
+	def __init__(self, USD, Crypto, File = "Purchasing.txt"):
 		self.USD = USD
 		self.Crypto = Crypto
+		self.file = File 
 
-	def print_info(self):
-		print "==============="
-		print "Current USD: " + str(self.USD)
-		print "Current Crypto: " + str(self.Crypto)
-		print "==============="
+	def current_info(self):
+		return  "=============== \n" + "Current USD: " + str(self.USD) + "\n" + "Current Crypto: " + str(self.Crypto) + "\n" +"===============" 
 
 	def buy(self, price_crypto):
 		if self.USD < 25:
@@ -16,7 +14,10 @@ class Bank(object):
 			return 
 		self.Crypto = self.Crypto + ((self.USD / 2)/price_crypto)
 		self.USD = self.USD - (self.USD/2) - ((self.USD/2) * 0.003) 
-		self.print_info()
+		print(self.current_info())
+		rFile = open(self.file, "a")
+		rFile.write(self.current_info())
+		rFile.close()
 
 	def sell(self, price_crypto):
 		if self.Crypto <= 0:
@@ -24,7 +25,10 @@ class Bank(object):
 			return 
 		self.USD = (self.Crypto - self.Crypto * 0.003) * price_crypto
 		self.Crypto = 0
-		self.print_info
+		print(self.current_info())
+		rFile = open(self.file, "a")
+		rFile.write(self.current_info())
+		rFile.close()
 
 
 		
