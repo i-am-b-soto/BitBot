@@ -1,5 +1,6 @@
 from Bank import Bank
 from datetime import datetime
+import sys
 
 class Decision(object):
 	""""""
@@ -30,6 +31,9 @@ class Decision(object):
 				self.has_bought = True
 			else:
 				print "Holding"
+
+		if bank.dead:
+			sys.exit("Bank is out of resources, halting program")
 
 		return 
 		
