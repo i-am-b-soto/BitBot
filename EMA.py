@@ -65,12 +65,12 @@ class EMA(object):
 		self.EMA.append(self.closing_prices[0])
 		for i in range(1, len(self.closing_prices)):
 			self.EMA.append(self.closing_prices[i] * self.multiplier() + self.EMA[i-1] * (1 - self.multiplier()))
-		return self.EMA[self.duration - 1]
+		return self.EMA[len(self.EMA)-1]
 
 	# get da current price
 	def get_current_price(self):
 		return self.closing_prices[len(self.closing_prices)-1]
-		
+
 	# Get all dem current prices
 	def get_closing_prices(self):
 		return self.closing_prices
