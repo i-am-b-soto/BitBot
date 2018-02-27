@@ -9,9 +9,6 @@ class Decision(object):
 
 	def make_decision(self, EMA, SMA, price_crypto):
 		
-		print "--- Decision  ---"
-		print "EMA: " + str(EMA) + " SMA: " + str(SMA) + " Current Price: " + str(price_crypto)
-
 		# we are looking for an opportunity to sell
 		if self.has_bought:
 			if EMA <= SMA:
