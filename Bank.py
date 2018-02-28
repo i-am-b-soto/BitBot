@@ -14,8 +14,8 @@ class Bank(object):
 			print "Insuffecient USD to make Purchase"
 			self.dead = True
 			return 
-		self.Crypto = self.Crypto + ((self.USD / 2)/price_crypto)
-		self.USD = self.USD - (self.USD/2) - ((self.USD/2) * 0.003) 
+		self.Crypto = self.Crypto + ((self.USD / 2.0)/(price_crypto * 1.0))
+		self.USD = self.USD - (self.USD/2.0) - ((self.USD/2.0) * 0.003) 
 		print(self.current_info())
 
 	def sell(self, price_crypto):
