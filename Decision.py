@@ -23,7 +23,7 @@ class Decision(object):
 
 		# we are looking for an opportunity to buy
 		else:
-			if EMA >= SMA:
+			if EMA > SMA:
 				print "Purchasing at: " + str(price_crypto)
 				print "Time: " 
 				print datetime.now()

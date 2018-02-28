@@ -44,7 +44,7 @@ class GDAX(object):
         result = sorted(response.json(), key=lambda x: x[0])
         return result
       except Exception as e:
-        pass
+        return []
       
     return []
 

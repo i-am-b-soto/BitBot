@@ -57,7 +57,9 @@ class EMA(object):
 		
 		data = self.GDAX.make_request(datetime.utcnow().replace(microsecond = 0, second = 0) - timedelta(seconds = num_minutes * 60),
 		 datetime.utcnow().replace(microsecond = 0, second = 0))
-		self.generate_list(data)
+				
+		if data:
+			self.generate_list(data)
 
 	# Geeet summm
 	def get_EMA(self):
