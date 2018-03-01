@@ -24,10 +24,13 @@ def run():
   global decision, SMA, EMA
 
   iteration = 0
+  state = 0
   while (iteration < num_iterations):
     EMA.add_x_minutes(1)
     SMA.add_x_minutes(1)
     decision.make_decision(EMA.get_EMA(), SMA.get_SMA(), SMA.get_current_price())
+
+
     iteration = iteration + 1
 
     # To avoid being blocked from the server

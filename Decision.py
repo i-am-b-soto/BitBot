@@ -24,6 +24,10 @@ class Decision(object):
 		self.output_file = output_file
 
 	def sell(self, price_crypto):
+		if self.state !=2 :
+			print "Error, trying to sell on a buy"  
+			return
+
 		print " Selling at: " + str(price_crypto)
 		self.bank.sell(price_crypto)
 
@@ -39,6 +43,10 @@ class Decision(object):
 		samantha.close()
 
 	def buy(self, price_crypto):
+		
+		if self.state !=1:
+			return "Error, trying to buy on a sell"
+
 		print " Buying at: " + str(price_crypto)
 		self.bank.buy(price_crypto)
 
@@ -54,11 +62,11 @@ class Decision(object):
 		samantha.close()
 
 	def get_delta(self):
-		return (self.bank.spending_money() * GDAX.fee(self.coin))
+		return 0.000
 
 	def start_state(self, EMA, SMA, price_crypto):
 		delta = self.get_delta()
-		if EMA < (SMA - delta)*2:
+		if EMA < (SMA - delta * SMA):
 			# Switch to buy state 
 			self.state = 1
 			return  
@@ -66,30 +74,35 @@ class Decision(object):
 	# Waiting to buy (EMA > SMA)
 	def wait_to_buy(self, EMA, SMA, price_crypto):
 		delta = self.get_delta()
-		if EMA > (SMA + delta):
-			if price_crypto > self.bought_at:
-				self.buy(price_crypto)
-				self.state = 2
-				return 	
+		if EMA > (SMA + SMA*delta):
+			self.buy(price_crypto)
+			self.state = 2
+			return 	
 
 	# Waiting to sell (EMA < SMA)
 	def wait_to_sell(self, EMA, SMA, price_crypto):
 		delta = self.get_delta()
-		if EMA < (SMA - delta):
-			self.sell(price_crypto)
-			self.state = 1
-			return
+		if EMA < (SMA - SMA*delta):
+			if price_crypto > self.bought_at:
+				
+				self.sell(price_crypto)
+				self.state = 1
+				return
+
 
 	def get_state(self):
 		return self.state
 
 	# Think carefully
 	def make_decision(self, EMA, SMA, price_crypto):
-		return {
-		0 : self.start_state(EMA, SMA, price_crypto),
-		1 : self.wait_to_buy(EMA, SMA, price_crypto),
-		2 : self.wait_to_sell(EMA, SMA, price_crypto)
-		}[self.get_state()]
+		
+		if self.state == 0 : 
+			self.start_state(EMA, SMA, price_crypto),
+		if self.state == 1 : 
+			self.wait_to_buy(EMA, SMA, price_crypto),
+		if self.state == 2 : 
+			self.wait_to_sell(EMA, SMA, price_crypto)
+		
 	
 
 
