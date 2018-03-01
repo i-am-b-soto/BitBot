@@ -14,7 +14,15 @@ class GDAX(object):
   def __init__(self, coin):
 
     self.coin = coin
-    self.uri = 'https://api.gdax.com/products/'+ coin+ '/candles'
+    self.uri = 'https://api.gdax.com/products/'+ coin+ '/candles' 
+
+  @staticmethod
+  def fee(exchange):
+    return {
+    'BTC-USD': 0.0025,
+    'ETH-USD': 0.003,
+    'LTC-USD': 0.003
+    }[exchange] 
 
   @staticmethod
   def __date_to_iso8601(date):
